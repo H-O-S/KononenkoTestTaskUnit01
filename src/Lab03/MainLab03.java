@@ -27,18 +27,48 @@ public class MainLab03 {
 
             System.out.println("Please enter a string:");
             String string = scanner.nextLine();
+
+            System.out.println("Please enter a StringBuilder:");
+            StringBuilder stringBuilder = new StringBuilder(scanner.nextLine());
+
+/*
+            System.out.println("Please enter a StringBuffer:");
+            StringBuffer stringBuffer = new StringBuffer(scanner.nextLine());
+*/
+
             System.out.println("\nIn each word, all previous occurrences of the last character of this word are deleted:");
 
             for (String word : string.split(" ")) {
                 String lastCharacter = word.substring(word.length() - 1);
-                String result = word.replace(lastCharacter, "");
-                result = result + lastCharacter;
+                String result = word.replace(lastCharacter, "") + lastCharacter;
                 System.out.print(result + " ");
             }
+            System.out.println();
+
+            for (int i = 0; i < stringBuilder.length(); ) {
+                if (i > stringBuilder.lastIndexOf(" ")) {
+                    stringBuilder.append(" ");
+                }
+                int indexEndWord = stringBuilder.indexOf(" ", i);
+                int indexForDelete = 0;
+
+                StringBuilder word = new StringBuilder(stringBuilder.substring(i, indexEndWord));
+                StringBuilder lastCharacter = new StringBuilder(word.substring(word.length() - 1));
+
+                do {
+                    indexForDelete = word.indexOf(lastCharacter.toString(), indexForDelete);
+                    word.deleteCharAt(indexForDelete);
+                } while (indexForDelete <= (word.length() - 1));
+
+                i = ++indexEndWord;
+                System.out.print(word.append(lastCharacter) + " ");
+            }
+
+            scanner.close();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("\n\nError:\n" + e.getMessage());
         } finally {
-            System.out.println("\n\nThe program is executed without errors");
+            System.out.println("\n\nThe end program!");
         }
     }
 }
