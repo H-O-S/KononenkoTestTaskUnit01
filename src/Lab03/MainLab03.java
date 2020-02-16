@@ -39,18 +39,35 @@ public class MainLab03 {
             System.out.println("\nIn each word, all previous occurrences of the last character of this word are deleted:");
 
             for (String word : string.split(" ")) {
+                if (word.length() < 1) {
+                    continue;
+                }
                 String lastCharacter = word.substring(word.length() - 1);
                 String result = word.replace(lastCharacter, "") + lastCharacter;
                 System.out.print(result + " ");
             }
             System.out.println();
 
+            while (stringBuilder.indexOf(" ", 0) == 0) {
+                stringBuilder.deleteCharAt(0);
+            }
+
+            if ((stringBuilder.lastIndexOf(" ")) != (stringBuilder.length() - 1)) {
+                stringBuilder.append(" ");
+            }
+
+            SpacesAtTheEnd:
             for (int i = 0; i < stringBuilder.length(); ) {
-                if (i > stringBuilder.lastIndexOf(" ")) {
-                    stringBuilder.append(" ");
-                }
-                int indexEndWord = stringBuilder.indexOf(" ", i);
                 int indexForDelete = 0;
+                int indexEndWord = stringBuilder.indexOf(" ", i);
+
+                while (i == indexEndWord) {
+                    ++i;
+                    if (i >= stringBuilder.length()) {
+                        break SpacesAtTheEnd;
+                    }
+                    indexEndWord = stringBuilder.indexOf(" ", i);
+                }
 
                 StringBuilder word = new StringBuilder(stringBuilder.substring(i, indexEndWord));
                 StringBuilder lastCharacter = new StringBuilder(word.substring(word.length() - 1));
