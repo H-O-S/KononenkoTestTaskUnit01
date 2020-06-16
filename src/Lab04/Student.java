@@ -1,11 +1,11 @@
 package Lab04;
 
 public class Student {
-    String firstName;
-    String lastName;
-    Gender gender;
-    int age;
-    int yearOfStudy;
+    private String firstName;
+    private String lastName;
+    private Gender gender;
+    private int age;
+    private int yearOfStudy;
 
     public Student(String firstName, String lastName, Gender gender, int age, int yearOfStudy) {
         this.firstName = firstName;
@@ -57,12 +57,12 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", gender=" + gender +
-                ", age=" + age +
-                ", yearOfStudy=" + yearOfStudy +
-                '}';
+        return "Student -> " +
+                "firstName = '" + firstName + '\'' +
+                ", lastName = '" + lastName + '\'' +
+                ", gender = " + gender +
+                ", age = " + age +
+                ", yearOfStudy = " + yearOfStudy;
     }
+
 }
