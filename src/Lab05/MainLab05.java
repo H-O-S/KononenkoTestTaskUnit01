@@ -39,9 +39,26 @@
             seregaF rrF,f,ef  ,eef,,,,,,
 */
 
-package Lab05;
+        /*
+        1. Преобразование входящего текста в объект Text.
+            1). Во входящем тексте посчитать количество Sentence.
+            2). Создать объект Text с указанием количества Sentence для массива.
+            3). Во входящем тексте посчитать количество ProposalMembers.
+            4). Создать объект Sentence с указанием количества ProposalMembers для массива.
+            5). Во входящем тексте посчитать количество Letter.
+            6). Создать объект Word с указанием количества Letter для массива.
+            7). Входящий текст по символьно обрабатываем, создавая соответствующие объекты.
 
-import org.jetbrains.annotations.NotNull;
+        2. Обработка объекта Text для удаления предыдущих вхождений последней буквы в каждом слове.
+            1). Перебираем циклом каждую букву слова, начиная с конца и удаляем соответствующие буквы.
+            2). Создаем новый объект Word с обновленным количеством ячеек в массиве и заменяем им старый объект Word
+            в массиве объекта Sentence.
+            3). Выводим на экран результат.
+
+        */
+
+
+package Lab05;
 
 import java.util.Scanner;
 
@@ -49,15 +66,20 @@ public class MainLab05 {
     private static String string = "";
     private static StringBuilder stringB1 = null;
     private static StringBuilder stringB2 = null;
+    private static Text text = null;
 
     public static void main(String[] args) {
         try {
             dataEntry();
 
-            processingString();
+            ConvertStringToObjectText();
+            processingObjectText();
 
-            processingStringB(stringB1);
-            processingStringB(stringB2);
+            ConvertStringBToObjectText(stringB1);
+            processingObjectText();
+
+            ConvertStringBToObjectText(stringB2);
+            processingObjectText();
 
         } catch (Exception e) {
             System.out.println("\n\nError:\n" + e.getMessage());
@@ -83,58 +105,42 @@ public class MainLab05 {
         scanner.close();
     }
 
-    private static void processingString() {
-        for (String word : string.split(" ")) {
-            if (word.length() < 1) {
-                continue;
+    private static void ConvertStringToObjectText() {
+//        1). Во входящем тексте посчитать количество Sentence. (. ... ! ?)
+        char[] stringToChar = string.toCharArray();
+        char[] endOfSentenceSymbol = {'.', '!', '?'};
+
+        for (int i = 0; i < stringToChar.length; i++) {
+            if (!(Character.isLetterOrDigit(stringToChar[i]))) {
+//                stringToChar[i];
             }
-            String lastCharacter = word.substring(word.length() - 1);
-            String result = word.replace(lastCharacter, "") + lastCharacter;
-            System.out.print(result + " ");
         }
-        System.out.println();
+
+//        2). Создать объект Text с указанием количества Sentence для массива.
+//        3). Во входящем тексте посчитать количество ProposalMembers.
+//        4). Создать объект Sentence с указанием количества ProposalMembers для массива.
+//        5). Во входящем тексте посчитать количество Letter.
+//        6). Создать объект Word с указанием количества Letter для массива.
+//        7). Входящий текст по символьно обрабатываем, создавая соответствующие объекты.
+
     }
 
-    private static void processingStringB(@NotNull StringBuilder stringB) {
-        removeExtraSpacesInStringB(stringB);
+    private static void ConvertStringBToObjectText(StringBuilder stringB) {
+//        1). Во входящем тексте посчитать количество Sentence.
+//        2). Создать объект Text с указанием количества Sentence для массива.
+//        3). Во входящем тексте посчитать количество ProposalMembers.
+//        4). Создать объект Sentence с указанием количества ProposalMembers для массива.
+//        5). Во входящем тексте посчитать количество Letter.
+//        6). Создать объект Word с указанием количества Letter для массива.
+//        7). Входящий текст по символьно обрабатываем, создавая соответствующие объекты.
 
-        SpacesAtTheEnd:
-        for (int i = 0; i < stringB.length(); ) {
-            int indexEndWord = stringB.indexOf(" ", i);
-
-            while (i == indexEndWord) {
-                ++i;
-                if (i >= stringB.length()) {
-                    break SpacesAtTheEnd;
-                }
-                indexEndWord = stringB.indexOf(" ", i);
-            }
-
-            StringBuilder word = new StringBuilder(stringB.substring(i, indexEndWord));
-            StringBuilder lastCharacter = new StringBuilder(word.substring(word.length() - 1));
-
-            deleteAllOccurrencesOfTheLastCharacter(word, lastCharacter);
-            i = ++indexEndWord;
-        }
-        System.out.println();
     }
 
-    private static void removeExtraSpacesInStringB(@NotNull StringBuilder stringB) {
-        while (stringB.indexOf(" ", 0) == 0) {
-            stringB.deleteCharAt(0);
-        }
-        if ((stringB.lastIndexOf(" ")) != (stringB.length() - 1)) {
-            stringB.append(" ");
-        }
-    }
+    private static void processingObjectText() {
+//        1). Перебираем циклом каждую букву слова, начиная с конца и удаляем соответствующие буквы.
+//        2). Создаем новый объект Word с обновленным количеством ячеек в массиве и заменяем им старый объект Word
+//        в массиве объекта Sentence.
+//        3). Выводим на экран результат.
 
-    private static void deleteAllOccurrencesOfTheLastCharacter(@NotNull StringBuilder word, @NotNull StringBuilder lastCharacter) {
-        int indexForDelete = 0;
-        do {
-            indexForDelete = word.indexOf(lastCharacter.toString(), indexForDelete);
-            word.deleteCharAt(indexForDelete);
-        } while (indexForDelete <= (word.length() - 1));
-
-        System.out.print(word.append(lastCharacter) + " ");
     }
 }
